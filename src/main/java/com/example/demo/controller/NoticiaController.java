@@ -18,7 +18,7 @@ import com.example.demo.service.NoticiaService;
 
 
 
-@RequestMapping(path = "api/v1/noticia")
+@RequestMapping(path = "api/v1/noticias")
 public class NoticiaController extends ControllerGenerico<Noticia, NoticiaService>{
 
 
