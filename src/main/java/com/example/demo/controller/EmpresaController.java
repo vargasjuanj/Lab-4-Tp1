@@ -18,7 +18,7 @@ import com.example.demo.service.EmpresaService;
 
 
 
-@RequestMapping(path = "api/v1/empresas")
+@RequestMapping(path = "api/v1/empresa")
 public class EmpresaController extends ControllerGenerico<Empresa, EmpresaService>{
 
 
