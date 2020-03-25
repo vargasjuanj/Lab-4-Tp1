@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface NoticiaRepository extends JpaRepository<Noticia,Integer> {
-    @Query(value = "SELECT * FROM noticia WHERE empresa_id= :id", nativeQuery = true)
+    @Query(value = "SELECT * FROM noticia WHERE empresa_id= :id ORDER BY fecha_publicacion DESC LIMIT 5", nativeQuery = true)
     public List<Noticia> getLatest(@Param("id") int id);
 }
