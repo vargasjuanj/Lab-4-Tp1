@@ -5,6 +5,8 @@ import com.example.demo.entities.Noticia;
 import com.example.demo.repository.EmpresaRepository;
 import com.example.demo.repository.NoticiaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -12,28 +14,32 @@ import java.util.Optional;
 @Service
 public class NoticiaService extends ServicioGenerico<Noticia, NoticiaRepository> {
     @Autowired
-    private NoticiaRepository repositoryDom;
+    private NoticiaRepository repositoryNoticias;
     @Autowired
-    private EmpresaRepository repositoryPer;
+    private EmpresaRepository repositoryEmpresas;
 
+
+    public Page<Noticia> paginas(Pageable pageable){
+        return repositoryNoticias.findAll(pageable);
+    }
     @Override
-    public Noticia update(long id, Noticia domicilio) throws Exception {
+    public Noticia update(long id, Noticia noticia) throws Exception {
 
         try {
-            Optional<Noticia> entityOptional = repositoryDom.findById(id);
-            domicilio.setId(entityOptional.get().getId());
+            Optional<Noticia> entityOptional = repositoryNoticias.findById(id);
+            noticia.setId(entityOptional.get().getId());
 /*
 try {
-    Optional<Persona> personaOptional = repositoryPer.findById((long) domicilio.getPersona().getId());
-    Persona persona = personaOptional.get();
-    persona.addNoticia(domicilio);
-    repositoryPer.save(persona);
-    domicilio.setPersona(persona);
+    Optional<Noticia> noticiaOptional = repositoryEmpresas.findById((long) noticia.getNoticia().getId());
+    Noticia noticia = noticiaOptional.get();
+    noticia.addNoticia(noticia);
+    repositoryEmpresas.save(noticia);
+    noticia.setNoticia(noticia);
 }catch(Exception e){}
 */
 
-            domicilio = repositoryDom.save(domicilio);
-            return domicilio;
+            noticia = repositoryNoticias.save(noticia);
+            return noticia;
 
         } catch (Exception e) {
 
@@ -47,18 +53,18 @@ try {
 
     /*
         @Override
-        public Noticia save(Noticia domicilio) throws Exception {
+        public Noticia save(Noticia noticia) throws Exception {
             try {
 
-                Optional<Persona> entityOptional = repositoryPer.findById((long) domicilio.getPersona().getId());
+                Optional<Noticia> entityOptional = repositoryEmpresas.findById((long) noticia.getNoticia().getId());
 
-                Persona persona = entityOptional.get();
-                persona.addNoticia(domicilio);
-               repositoryPer.save(persona);
-    domicilio.setPersona(persona);
-                domicilio= repositoryDom.save(domicilio);
+                Noticia noticia = entityOptional.get();
+                noticia.addNoticia(noticia);
+               repositoryEmpresas.save(noticia);
+    noticia.setNoticia(noticia);
+                noticia= repositoryNoticias.save(noticia);
 
-                return domicilio;
+                return noticia;
 
             } catch (Exception e) {
 
